@@ -56,7 +56,7 @@ const Header = () => {
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                     >
-                        TEN
+                        T°en
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
