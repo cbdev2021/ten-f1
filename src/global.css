@@ -42,7 +42,7 @@ body {
 }
 
 .caja {
-    height: 120px;
+    height: 70px;
     display: flex;
     align-items: center;
     color: white;
@@ -85,7 +85,7 @@ body {
     }
 
     .caja {
-        height: 60px;
+        height: 70px;
     }
 
     .caja1 {
@@ -121,7 +121,7 @@ body {
     }
 
     .caja {
-        height: 60px;
+        height: 70px;
     }
 
     .caja1 {
@@ -148,6 +148,10 @@ body {
         border-top: solid;
         border-color: white;
         border-width: 1px;
+    }
+
+    .box-carousel{
+      width: 260px;
     }
 }
 

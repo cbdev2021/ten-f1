@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -50,7 +50,7 @@ const Carousel = () => {
         }
     ];
 
-    const visibleItems = 2; // Mostrar dos tarjetas a la vez
+    const visibleItems = 1; // Mostrar una tarjeta a la vez
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - visibleItems : prevIndex - 1));
@@ -61,22 +61,23 @@ const Carousel = () => {
     };
 
     return (
-        <Box display="flex" alignItems="center" > {/* Ocupa el 100% del contenedor padre */}
+        <Box display="flex" alignItems="center" className="box-carousel">
             <IconButton onClick={handlePrev}>
                 <ArrowBackIosNewIcon />
             </IconButton>
-            <Box display="flex" overflow="hidden" width="180px"> {/* Resta el ancho de los botones de navegación */}
+            <Box display="flex" overflow="hidden" width="360px">
                 <Box
                     display="flex"
                     sx={{
-                        transform: `translateX(-${currentIndex * (50 / visibleItems)}%)`, // Ancho de la tarjeta = 50%
-                        transition: 'transform 0.5s ease',
-                        
+                        transform: `translateX(-${currentIndex * (105 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
+                        transition: 'transform 1s ease',
+                        width: `${100 * items.length}%`
                     }}
                 >
+
                     {items.map((item, index) => (
-                        <Card key={index} sx={{ height: '58px', margin: '0 5px', width: '180px' }}> {/* Ancho ajustado */}
-                            <CardContent sx={{ display: 'flex', width: '50px', alignItems: 'center', padding: '8px', gap: '8px' }}>
+                        <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
+                            <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px' }}>
                                 <CloudIcon fontSize="large" />
                                 <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
                                     <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
@@ -101,13 +102,7 @@ const Carousel = () => {
     );
 }
 
-export default Carousel;
-
-
-
-
-
-
+export default Carousel; 
 
 // import React, { useState } from 'react';
 // import Box from '@mui/material/Box';
