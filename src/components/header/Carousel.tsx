@@ -77,7 +77,7 @@ const Carousel = () => {
 
                     {items.map((item, index) => (
                         <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
-                            <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px' }}>
+                            <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '55px' }}>
                                 <CloudIcon fontSize="large" />
                                 <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
                                     <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
@@ -102,7 +102,7 @@ const Carousel = () => {
     );
 }
 
-export default Carousel; 
+export default Carousel;
 
 // import React, { useState } from 'react';
 // import Box from '@mui/material/Box';
