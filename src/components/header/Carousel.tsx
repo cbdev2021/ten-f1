@@ -65,11 +65,11 @@ const Carousel = () => {
             <IconButton onClick={handlePrev}>
                 <ArrowBackIosNewIcon />
             </IconButton>
-            <Box display="flex" overflow="hidden" width="360px">
+            <Box display="flex" overflow="hidden" width="340px">
                 <Box
                     display="flex"
                     sx={{
-                        transform: `translateX(-${currentIndex * (105 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
+                        transform: `translateX(-${currentIndex * (106 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
                         transition: 'transform 1s ease',
                         width: `${100 * items.length}%`
                     }}
@@ -78,7 +78,7 @@ const Carousel = () => {
                     {items.map((item, index) => (
                         <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
                             <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '55px' }}>
-                                <CloudIcon fontSize="large" />
+                                <CloudIcon fontSize="medium" />
                                 <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
                                     <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
                                         {item.name}
