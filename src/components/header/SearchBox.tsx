@@ -1,4 +1,3 @@
- 
 import styled from 'styled-components';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -23,11 +22,16 @@ const StyledAutocomplete = styled(Autocomplete)`
 const SearchBox = () => {
     return (
         <StyledAutocomplete
-            style={{width: '245px', background:'white'}}
+            style={{width: '245px', background:'white', borderRadius: '4px'}}
             freeSolo
             options={regions}
             renderInput={(params) => (
-                <TextField {...params} label="Temperatura en .." variant="outlined" />
+                <TextField
+          {...params}
+          variant="outlined"
+          placeholder="Temperatura en .."
+          InputLabelProps={{ shrink: false }}
+        />
             )}
             renderOption={(props, option) => (
                 <ListItem {...props} key={option}>
