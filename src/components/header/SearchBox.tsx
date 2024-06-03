@@ -13,8 +13,9 @@ const regions = [
 const StyledAutocomplete = styled(Autocomplete)`
   @media screen and (min-width: 481px) and (max-width: 768px) {
     .MuiAutocomplete-inputRoot {
-      background-color: lightblue;
-      font-size: 18px;
+        //background-color: lightblue;
+        //font-size: 18px;
+    
     }
   }
 `;
