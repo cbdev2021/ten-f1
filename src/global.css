@@ -87,6 +87,11 @@ body {
     /* background-color: blue; */
     background-color: #3498db;
 }
+
+/* CONTENT */
+.content{
+    margin-top: 70px;
+}
  
 @media screen and (max-width: 768px) {
     .header {
@@ -126,6 +131,10 @@ body {
     .divider-hidden {
         display: none;
     }    
+
+    .content{
+        margin-top: 140px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -167,10 +176,7 @@ body {
       width: 250px;
     } 
 }
-
-
  
-
 /* OTROS */
 /* nav.caja4 {
   display: flex;
@@ -186,6 +192,13 @@ nav.caja4>div {
   margin-top: 120px
   
 } */
+
+
+
+
+
+
+
 
 .footer {
   bottom: 0;
