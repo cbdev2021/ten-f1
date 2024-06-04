@@ -63,7 +63,7 @@ const Carousel = () => {
     return (
         <Box display="flex" alignItems="center" className="box-carousel">
             <IconButton onClick={handlePrev}>
-                <ArrowBackIosNewIcon />
+                <ArrowBackIosNewIcon  sx={{ color: "white"}}/>
             </IconButton>
             <Box display="flex" overflow="hidden" width="340px">
                 <Box
@@ -96,7 +96,7 @@ const Carousel = () => {
                 </Box>
             </Box>
             <IconButton onClick={handleNext}>
-                <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon  sx={{ color: "white"}}/>
             </IconButton>
         </Box>
     );

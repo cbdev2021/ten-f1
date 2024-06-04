@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchBox from './header/SearchBox';
 import Carousel from './header/Carousel';
+import { Divider } from '@mui/material';
 
 const Header = () => {
     return (
@@ -21,6 +22,10 @@ const Header = () => {
                             <MenuIcon />
                         </IconButton>
                     </div>
+                    <div style={{ height: '60px' }} className='divider-hidden'>
+                        <Divider orientation="vertical" style={{ backgroundColor: 'white', width: '0.2px' }} />
+                    </div>
+
                     <div className="caja caja3">
                         <SearchBox />
                     </div>
@@ -39,7 +44,7 @@ export default Header;
 
 // // Header.js
 // import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';  
+// import Box from '@mui/material/Box';
 
 // const Header = () => {
 //     return (
