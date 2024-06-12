@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
 
-const Content = () => {
+const Hourly = () => {
     return (
         <main>
             <Box className="content">
-                <h1>This is the content component ! </h1>
+                <h1>This is the Hourly component ! </h1>
             </Box>
         </main>
     );
 }
 
-export default Content;
+export default Hourly;
