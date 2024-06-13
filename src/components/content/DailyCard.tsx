@@ -13,7 +13,7 @@ const DailyCard = ({ current }) => {
         <Box
             className="content"
             sx={{
-                maxWidth: 300, // Ancho máximo
+                maxWidth: 275, // Ancho máximo
                 maxHeight: 400, // Altura máxima
                 borderRadius: 8, // Radio de borde ajustable
                 border: "2px solid #ccc", // Color de borde
