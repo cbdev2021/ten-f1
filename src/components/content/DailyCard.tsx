@@ -1,3 +1,4 @@
+
 import { Box, Typography } from "@mui/material";
 import moment from "moment"; // Importa moment para el manejo de fechas
 
@@ -17,11 +18,13 @@ const DailyCard = ({ current }) => {
                 borderRadius: 8, // Radio de borde ajustable
                 border: "2px solid #ccc", // Color de borde
                 padding: 2, // Espacio interno
-                background: "linear-gradient(to right, #78a3d1, #dae4e9)",  
+                background: "linear-gradient(to right, #78a3d1, #dae4e9)",                  
                 // display: "flex",  
                 // flexDirection: "column",  
-                // justifyContent: 'flex-start',  
-                alignItems: 'center'  
+                // justifyContent: 'center',                  
+                alignItems: 'center',  
+                marginTop: '90px',
+                marginBottom: '20px'
             }}
         >
             <Typography variant="h2" sx={{ mb: 1, justifyContent:'ce' }}>

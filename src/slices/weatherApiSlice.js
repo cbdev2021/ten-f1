@@ -1,7 +1,12 @@
 import { apiSlice } from './apiSlice';
 
+<<<<<<< HEAD
 // const LOCAL_BACKEND_URL = 'http://localhost:10000/api/weather';
 const LOCAL_BACKEND_URL = 'https://ten-b1.vercel.app/api/weather'; 
+=======
+const LOCAL_BACKEND_URL = 'http://localhost:10000/api/weather';
+// const LOCAL_BACKEND_URL = 'https://ten-b1.vercel.app/api/weather'; 
+>>>>>>> dev
 
 export const weatherApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
