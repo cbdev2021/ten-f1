@@ -52,6 +52,60 @@ const DailyCard = ({ current }) => {
 
 export default DailyCard;
 
+// import { Box, Typography } from "@mui/material";
+// import moment from "moment";
+// import   Draggable   from "react-draggable"; // Importa Draggable desde react-draggable
+
+// const DailyCard = ({ current }) => {
+//     const { temperature, summary, wind } = current;
+
+//     const currentDate = moment().format("dddd DD [de] MMMM");
+
+//     return (
+//         <Draggable>
+//             <Box
+//                 className="content"
+//                 sx={{
+//                     maxWidth: 275,
+//                     maxHeight: 400,
+//                     borderRadius: 8,
+//                     border: "2px solid #ccc",
+//                     padding: 2,
+//                     background: "linear-gradient(to right, #78a3d1, #dae4e9)",
+//                     alignItems: 'center',
+//                     marginTop: '90px',
+//                     marginBottom: '20px',
+//                     cursor: 'move' // Añade cursor: 'move' para indicar que es draggable
+//                 }}
+//             >
+//                 <Typography variant="h2" sx={{ mb: 1 }}>
+//                     {temperature.toFixed(0)}°
+//                 </Typography>
+//                 <Typography variant="body1" sx={{ mb: 1 }}>
+//                     {summary}
+//                 </Typography>
+//                 <Typography variant="body2" sx={{ mb: 1 }}>
+//                     {currentDate}
+//                 </Typography>
+//                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+//                     <Typography variant="body2" sx={{ mr: 1 }}>
+//                        Wind:  {wind.speed} m/s
+//                     </Typography>
+//                     <Typography variant="body2" sx={{ mr: 1 }}>
+//                         {wind.angle}°
+//                     </Typography>
+//                     <Typography variant="body2">
+//                         {wind.dir}
+//                     </Typography>
+//                 </Box>
+//             </Box>
+//         </Draggable>
+//     );
+// }
+
+// export default DailyCard;
+
+
 
 // import { Box } from "@mui/material";
 
