@@ -6,11 +6,10 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import CloudIcon from '@mui/icons-material/Cloud';
+import CloudIcon from '@mui/icons-material/Cloud'; // Import the Cloud icon
 
 const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [startX, setStartX] = useState(0);
 
     const items = [
         {
@@ -51,7 +50,7 @@ const Carousel = () => {
         }
     ];
 
-    const visibleItems = 1;
+    const visibleItems = 1; // Mostrar una tarjeta a la vez
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - visibleItems : prevIndex - 1));
@@ -61,41 +60,21 @@ const Carousel = () => {
         setCurrentIndex((prevIndex) => (prevIndex === items.length - visibleItems ? 0 : prevIndex + 1));
     };
 
-    const handleTouchStart = (event) => {
-        setStartX(event.touches[0].clientX);
-    };
-
-    const handleTouchMove = (event) => {
-        const x = event.touches[0].clientX;
-        const diff = startX - x;
-
-        if (diff > 50) {
-            handleNext();
-        } else if (diff < -50) {
-            handlePrev();
-        }
-    };
-
     return (
-        <Box
-            display="flex"
-            alignItems="center"
-            className="box-carousel"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-        >
+        <Box display="flex" alignItems="center" className="box-carousel">
             <IconButton onClick={handlePrev}>
-                <ArrowBackIosNewIcon sx={{ color: "white" }} />
+                <ArrowBackIosNewIcon  sx={{ color: "white"}}/>
             </IconButton>
             <Box display="flex" overflow="hidden" width="340px">
                 <Box
                     display="flex"
                     sx={{
-                        transform: `translateX(-${currentIndex * (106 / items.length)}%)`,
+                        transform: `translateX(-${currentIndex * (106 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
                         transition: 'transform 1s ease',
                         width: `${100 * items.length}%`
                     }}
                 >
+
                     {items.map((item, index) => (
                         <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
                             <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '55px' }}>
@@ -117,15 +96,13 @@ const Carousel = () => {
                 </Box>
             </Box>
             <IconButton onClick={handleNext}>
-                <ArrowForwardIosIcon sx={{ color: "white" }} />
+                <ArrowForwardIosIcon  sx={{ color: "white"}}/>
             </IconButton>
         </Box>
     );
 }
 
 export default Carousel;
-
-
 
 // import { useState } from 'react';
 // import Box from '@mui/material/Box';
