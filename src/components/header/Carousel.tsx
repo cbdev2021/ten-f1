@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -10,7 +10,6 @@ import CloudIcon from '@mui/icons-material/Cloud'; // Import the Cloud icon
 
 const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const items = [
         {
             "name": "Santiago",
@@ -52,6 +51,9 @@ const Carousel = () => {
 
     const visibleItems = 1; // Mostrar una tarjeta a la vez
 
+    const [dragStartX, setDragStartX] = useState(null);
+    const [dragEndX, setDragEndX] = useState(null);
+
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - visibleItems : prevIndex - 1));
     };
@@ -60,17 +62,48 @@ const Carousel = () => {
         setCurrentIndex((prevIndex) => (prevIndex === items.length - visibleItems ? 0 : prevIndex + 1));
     };
 
+    const handleTouchStart = (e) => {
+        setDragStartX(e.touches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        if (dragStartX !== null) {
+            setDragEndX(e.touches[0].clientX);
+        }
+    };
+
+    const handleTouchEnd = () => {
+        if (dragStartX !== null && dragEndX !== null) {
+            const difference = dragStartX - dragEndX;
+            if (difference > 50) {
+                setCurrentIndex((prevIndex) => (prevIndex + 2 >= items.length ? items.length - visibleItems : prevIndex + 2)); // Avanzar dos tarjetas
+            } else if (difference < -50) {
+                setCurrentIndex((prevIndex) => (prevIndex - 2 < 0 ? 0 : prevIndex - 2)); // Retroceder dos tarjetas
+            }
+        }
+        setDragStartX(null);
+        setDragEndX(null);
+    };
+
     return (
-        <Box display="flex" alignItems="center" className="box-carousel">
+        <Box
+            display="flex"
+            alignItems="center"
+            className="box-carousel"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            sx={{ cursor: 'grab' }}
+        >
             <IconButton onClick={handlePrev}>
-                <ArrowBackIosNewIcon  sx={{ color: "white"}}/>
+                <ArrowBackIosNewIcon sx={{ color: "white"}} />
             </IconButton>
             <Box display="flex" overflow="hidden" width="340px">
                 <Box
                     display="flex"
                     sx={{
-                        transform: `translateX(-${currentIndex * (106 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
-                        transition: 'transform 1s ease',
+                        transform: `translateX(-${currentIndex * (106 / items.length)}%)`, // Ancho de la tarjeta = 100% / cantidad de items
+                        transition: 'transform 0.5s ease',
                         width: `${100 * items.length}%`
                     }}
                 >
@@ -96,13 +129,122 @@ const Carousel = () => {
                 </Box>
             </Box>
             <IconButton onClick={handleNext}>
-                <ArrowForwardIosIcon  sx={{ color: "white"}}/>
+                <ArrowForwardIosIcon sx={{ color: "white"}} />
             </IconButton>
         </Box>
     );
 }
 
 export default Carousel;
+
+
+
+
+// import { useState } from 'react';
+// import Box from '@mui/material/Box';
+// import IconButton from '@mui/material/IconButton';
+// import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+// import Card from '@mui/material/Card';
+// import CardContent from '@mui/material/CardContent';
+// import Typography from '@mui/material/Typography';
+// import CloudIcon from '@mui/icons-material/Cloud'; // Import the Cloud icon
+
+// const Carousel = () => {
+//     const [currentIndex, setCurrentIndex] = useState(0);
+
+//     const items = [
+//         {
+//             "name": "Santiago",
+//             "place_id": "santiago",
+//             "adm_area1": "Santiago Metropolitan",
+//             "adm_area2": "Provincia de Santiago",
+//             "lat": "33.45694S",
+//             "lon": "70.64827W",
+//             "temperature": "20°C"
+//         },
+//         {
+//             "name": "Valparaíso",
+//             "place_id": "valparaiso",
+//             "adm_area1": "Valparaíso Region",
+//             "adm_area2": "Provincia de Valparaíso",
+//             "lat": "33.04585S",
+//             "lon": "71.61968W",
+//             "temperature": "18°C"
+//         },
+//         {
+//             "name": "Concepción",
+//             "place_id": "concepcion",
+//             "adm_area1": "Biobío Region",
+//             "adm_area2": "Provincia de Concepción",
+//             "lat": "36.82699S",
+//             "lon": "73.04977W",
+//             "temperature": "15°C"
+//         },
+//         {
+//             "name": "La Serena",
+//             "place_id": "la_serena",
+//             "adm_area1": "Coquimbo Region",
+//             "adm_area2": "Provincia de Elqui",
+//             "lat": "29.90778S",
+//             "lon": "71.25403W",
+//             "temperature": "22°C"
+//         }
+//     ];
+
+//     const visibleItems = 1; // Mostrar una tarjeta a la vez
+
+//     const handlePrev = () => {
+//         setCurrentIndex((prevIndex) => (prevIndex === 0 ? items.length - visibleItems : prevIndex - 1));
+//     };
+
+//     const handleNext = () => {
+//         setCurrentIndex((prevIndex) => (prevIndex === items.length - visibleItems ? 0 : prevIndex + 1));
+//     };
+
+//     return (
+//         <Box display="flex" alignItems="center" className="box-carousel">
+//             <IconButton onClick={handlePrev}>
+//                 <ArrowBackIosNewIcon  sx={{ color: "white"}}/>
+//             </IconButton>
+//             <Box display="flex" overflow="hidden" width="340px">
+//                 <Box
+//                     display="flex"
+//                     sx={{
+//                         transform: `translateX(-${currentIndex * (106 / items.length)}%)`, //moviemiento click ( +gap), Ancho de la tarjeta = 100% / cantidad de items
+//                         transition: 'transform 1s ease',
+//                         width: `${100 * items.length}%`
+//                     }}
+//                 >
+
+//                     {items.map((item, index) => (
+//                         <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
+//                             <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '55px' }}>
+//                                 <CloudIcon fontSize="medium" />
+//                                 <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
+//                                     <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
+//                                         {item.name}
+//                                     </Typography>
+//                                     <Typography variant="body2" sx={{ fontSize: '0.75rem' }}>
+//                                         {item.adm_area1}
+//                                     </Typography>
+//                                 </Box>
+//                                 <Typography variant="body2" sx={{ fontSize: '0.75rem' }}>
+//                                     {item.temperature}
+//                                 </Typography>
+//                             </CardContent>
+//                         </Card>
+//                     ))}
+//                 </Box>
+//             </Box>
+//             <IconButton onClick={handleNext}>
+//                 <ArrowForwardIosIcon  sx={{ color: "white"}}/>
+//             </IconButton>
+//         </Box>
+//     );
+// }
+
+// export default Carousel;
 
 // import { useState } from 'react';
 // import Box from '@mui/material/Box';
