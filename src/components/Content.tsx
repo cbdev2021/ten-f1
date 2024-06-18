@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
-import DailyCard from "./content/DailyCard";
+import { Box } from "@mui/material"; 
 import Hourly from "./content/Hourly";
+import Current from "./content/Current";
+// import DailyCard from "./content/DailyCard";
 
 const Content = () => {
     const current = {
@@ -478,7 +479,7 @@ const Content = () => {
     return (
         <main>
             <Box className="content">
-                <DailyCard current={current} />
+                <Current current={current} />
                 <Hourly hourly={hourly} />
             </Box>
         </main>
