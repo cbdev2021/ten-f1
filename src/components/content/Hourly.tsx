@@ -7,6 +7,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
+import AirIcon from '@mui/icons-material/Air';
+import { Divider } from '@mui/material';
 
 const WeatherIcon = ({ icon }) => {
     // Aquí puedes mapear `icon` a diferentes componentes de iconos según tu necesidad
@@ -79,8 +81,11 @@ const Hourly = ({ hourly }) => {
                             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '150px' }}>
                                 <Typography variant="body2">{moment(hour.date).format("HH:mm")}</Typography>
                                 <WeatherIcon icon={hour.icon} />
-                                <Typography variant="h6">{hour.temperature.toFixed(1)}°C</Typography>
-                                <Typography variant="body2">Wind: {hour.wind.speed} m/s {hour.wind.dir}</Typography>
+                                <Typography variant="h6" fontWeight="bold">{hour.temperature.toFixed(1)}°C</Typography>
+                                <Divider sx={{ marginTop: '10px', borderTop: '1px solid black', margin: '0px auto', width: '70%' }} />
+                                <AirIcon style={{ marginRight: '8px', marginBottom: '-5px' }} />
+                                <Typography variant="body2" sx={{ fontSize: '0.8rem' }}> {hour.wind.speed} m/s {hour.wind.dir}</Typography>
+
                             </CardContent>
                         </Card>
                     ))}
