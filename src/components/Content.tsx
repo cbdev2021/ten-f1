@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import Hourly from "./content/Hourly";
 import Current from "./content/Current";
 import DailyCard from "./content/DailyCard"; // Importando DailyCard
+import { auto } from '@popperjs/core';
 
 const Content = () => {
     const current = {
@@ -680,9 +681,11 @@ const Content = () => {
 
     return (
         <main>
-            <Box className="content">
-                <Current current={current} />
+            <Box className="content">             
+                <Current current={current} /> 
                 <Hourly hourly={hourly} />
+                <Divider sx={{ marginTop: '10px', borderTop: '2px solid white', margin: '10px auto', width: '70%' }} />
+            
                 <DailyCard daily={daily} />
             </Box>
         </main>

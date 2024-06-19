@@ -8,6 +8,11 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 
+import AirIcon from '@mui/icons-material/Air';
+import CloudIcon from '@mui/icons-material/Cloud';
+import OpacityIcon from '@mui/icons-material/Opacity';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+
 const WeatherIcon = ({ icon }: { icon: number }) => {
     // Puedes mapear `icon` a diferentes componentes de iconos según tu necesidad
     return <Typography variant="h4">🌧️</Typography>; // Icono de ejemplo
@@ -90,7 +95,7 @@ const DailyCard: React.FC<DailyProps> = ({ daily }) => {
     };
 
     return (
-        <Box display="flex" alignItems="center" className="box-carousel-daily" sx={{ marginTop: '20px' }}>
+        <Box display="flex" alignItems="center" className="box-carousel-daily" sx={{ marginTop: '10px' }}>
             <IconButton onClick={handlePrev} disabled={currentIndex === 0}>
                 <ArrowBackIosNewIcon sx={{ color: "white" }} />
             </IconButton>
@@ -112,20 +117,107 @@ const DailyCard: React.FC<DailyProps> = ({ daily }) => {
                     }}
                 >
                     {daily.data.map((day, index) => (
+                        // <Card key={index} sx={{ flex: '0 0 230px', margin: '0 5px' }}>
+                        //     <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                        //         <Typography variant="h6" fontWeight="bold">{moment(day.day).format("dddd")}</Typography>
+                        //         <WeatherIcon icon={day.icon} />
+                        //         {day.all_day && (
+                        //             // <>
+                        //             //     <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
+                        //             //     <Typography>wind: {day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
+                        //             //     <Typography>cloud cover: {day.all_day.cloud_cover.total}%</Typography>
+                        //             //     <Typography>rain: {day.all_day.precipitation.total} mm, {day.all_day.precipitation.type}</Typography>
+                        //             // </>
+
+                        //             // <>
+                        //             //     <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
+                        //             //     <Typography><AirIcon /> {day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
+                        //             //     <Typography><CloudIcon /> {day.all_day.cloud_cover.total}<span>%</span></Typography>
+                        //             //     <Typography><OpacityIcon /> {day.all_day.precipitation.total} mm, {day.all_day.precipitation.type}</Typography>
+                        //             // </>
+
+                        //             <>
+                        //                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                        //                     <ThermostatIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                        //                     <AirIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                        //                     <CloudIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.cloud_cover.total}<span>%</span></Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center' }}>
+                        //                     <OpacityIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.precipitation.total} mm, {day.all_day.precipitation.type}</Typography>
+                        //                 </div>
+                        //             </>
+ 
+                        //         )}
+                        //     </CardContent>
+                        // </Card>
+                        
+                        // <Card key={index} sx={{ flex: '0 0 230px', margin: '0 5px' }}>
+                        //     <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+                        //         <Typography variant="h6" fontWeight="bold">{moment(day.day).format("dddd")}</Typography>
+                        //         <WeatherIcon icon={day.icon} />
+                        //         {day.all_day && (
+                        //             <>
+                        //                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        //                     <ThermostatIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        //                     <AirIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        //                     <CloudIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.cloud_cover.total}<span>%</span></Typography>
+                        //                 </div>
+                        //                 <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        //                     <OpacityIcon style={{ marginRight: '8px' }} />
+                        //                     <Typography>{day.all_day.precipitation.total} mm, {day.all_day.precipitation.type}</Typography>
+                        //                 </div>
+                        //             </>
+                        //         )}
+                        //     </CardContent>
+                        // </Card>
                         <Card key={index} sx={{ flex: '0 0 230px', margin: '0 5px' }}>
-                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                                <Typography variant="h6" fontWeight="bold">{moment(day.day).format("dddd")}</Typography>
-                                <WeatherIcon icon={day.icon} />
+                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+                                <Typography variant="h6" fontWeight="bold" style={{ margin: 'auto' }}>{moment(day.day).format("dddd")}</Typography>
+                                <div style={{ margin: 'auto', display: 'block' }}>
+                                    <WeatherIcon icon={day.icon} />
+                                </div> 
                                 {day.all_day && (
                                     <>
-                                        <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
-                                        <Typography>wind: {day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
-                                        <Typography>cloud cover: {day.all_day.cloud_cover.total}%</Typography>
-                                        <Typography>rain: {day.all_day.precipitation.total} mm, {day.all_day.precipitation.type}</Typography>
+                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                            <ThermostatIcon style={{ marginRight: '8px' }} />
+                                            <Typography fontWeight="bold">{day.all_day.temperature_min}° / {day.all_day.temperature_max}°</Typography>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                            <AirIcon style={{ marginRight: '8px' }} />
+                                            <Typography>{day.all_day.wind.speed} m/s, {day.all_day.wind.dir} ({day.all_day.wind.angle}°)</Typography>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                            <CloudIcon style={{ marginRight: '8px' }} />
+                                            <Typography>{day.all_day.cloud_cover.total}<span>%</span></Typography>
+                                        </div>
+                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                            <OpacityIcon style={{ marginRight: '8px' }} />
+                                            <Typography>{day.all_day.precipitation.total} mm
+                                                {/* , {day.all_day.precipitation.type} */}
+                                            </Typography>
+                                        </div>
                                     </>
                                 )}
                             </CardContent>
                         </Card>
+
+
+
                     ))}
                 </Box>
             </Box>
