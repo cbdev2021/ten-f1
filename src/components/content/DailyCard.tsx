@@ -186,7 +186,16 @@ const DailyCard: React.FC<DailyProps> = ({ daily }) => {
                         //     </CardContent>
                         // </Card>
                         <Card key={index} sx={{ flex: '0 0 230px', margin: '0 5px' }}>
-                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' }}>
+                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px' ,
+                                 '&:hover': {
+                                     backgroundColor: '#f0f0f0',  // Cambia al color que desees al hacer hover
+                                     cursor: 'pointer',  // Cambia el cursor al estilo deseado (opcional) 
+                                     transform: 'scale(1.02, 1.02 )',
+                                     transition: 'background-color 0.7s, transform 0.7s'  // Añade transiciones para las propiedades que cambian
+ 
+                                 } 
+                        
+                            }}>
                                 <Typography variant="h6" fontWeight="bold" style={{ margin: 'auto' }}>{moment(day.day).format("dddd")}</Typography>
                                 <div style={{ margin: 'auto', display: 'block' }}>
                                     <WeatherIcon icon={day.icon} />

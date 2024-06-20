@@ -78,7 +78,17 @@ const Hourly = ({ hourly }) => {
                 >
                     {hourly.data.map((hour, index) => (
                         <Card key={index} sx={{ flex: '0 0 100px', margin: '0 5px', height: '200px', width: '100px' }}>
-                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '150px' }}>
+                            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '150px' 
+                                ,
+                                '&:hover': {
+                                    backgroundColor: '#f0f0f0',  // Cambia al color que desees al hacer hover
+                                    cursor: 'pointer',  // Cambia el cursor al estilo deseado (opcional) 
+                                    transform: 'scale(1.02, 1.02 )',
+                                    transition: 'background-color 0.7s, transform 0.7s'  // Añade transiciones para las propiedades que cambian
+
+                                }
+                        
+                        }}>
                                 <Typography variant="body2">{moment(hour.date).format("HH:mm")}</Typography>
                                 <WeatherIcon icon={hour.icon} />
                                 <Typography variant="h6" fontWeight="bold">{hour.temperature.toFixed(1)}°C</Typography>
