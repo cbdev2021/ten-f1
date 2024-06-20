@@ -25,7 +25,13 @@ const Current = ({ current }) => {
                 // justifyContent: 'center',                  
                 alignItems: 'center',
                 marginTop: '90px',
-                marginBottom: '20px'
+                marginBottom: '20px',
+                '&:hover': {
+                    backgroundColor: '#f0f0f0',   
+                    cursor: 'pointer',   
+                    transform: 'scale(1.01, 1.01 )',
+                    // transition: 'background-color 0.7s, transform 0.7s'   
+                }
             }}
         >
             <Typography variant="body2" sx={{ mb: 1 }}>

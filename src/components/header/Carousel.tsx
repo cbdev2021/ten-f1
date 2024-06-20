@@ -96,7 +96,7 @@ const Carousel = () => {
             sx={{ cursor: 'grab' }}
         >
             <IconButton onClick={handlePrev}>
-                <ArrowBackIosNewIcon sx={{ color: "white"}} />
+                <ArrowBackIosNewIcon sx={{ color: "white" }} />
             </IconButton>
             <Box display="flex" overflow="hidden" width="340px">
                 <Box
@@ -109,7 +109,16 @@ const Carousel = () => {
                 >
 
                     {items.map((item, index) => (
-                        <Card key={index} sx={{ flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px' }}>
+                        <Card key={index} sx={{
+                            flex: `0 0 ${100 / items.length}%`, margin: '0 5px', height: '60px',
+                            '&:hover': {
+                                backgroundColor: '#f0f0f0',  // Cambia al color que desees al hacer hover
+                                cursor: 'pointer',  // Cambia el cursor al estilo deseado (opcional) 
+                                // transform: 'scale(1.001, 1.001 )',
+                                transition: 'background-color 0.7s, transform 0.7s'  // Añade transiciones para las propiedades que cambian
+
+                            }
+                        }}>
                             <CardContent sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '8px', minHeight: '55px' }}>
                                 <CloudIcon fontSize="medium" />
                                 <Box sx={{ flexGrow: 1, textAlign: 'center' }}>
@@ -129,7 +138,7 @@ const Carousel = () => {
                 </Box>
             </Box>
             <IconButton onClick={handleNext}>
-                <ArrowForwardIosIcon sx={{ color: "white"}} />
+                <ArrowForwardIosIcon sx={{ color: "white" }} />
             </IconButton>
         </Box>
     );
