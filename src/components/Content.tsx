@@ -5,7 +5,8 @@ import Current from "./content/Current";
 import DailyCard from "./content/DailyCard"; // Importando DailyCard
 import { auto } from '@popperjs/core';
 
-const Content = () => {
+// const Content = () => {
+const Content = ({ selectedPlace }) => {
     const current = {
         "icon": "fog",
         "icon_num": 9,
@@ -681,11 +682,17 @@ const Content = () => {
 
     return (
         <main>
-            <Box className="content">             
-                <Current current={current} /> 
+            <Box className="content">
+                {selectedPlace && (
+                    <Box>
+                        <h2>Weather for {selectedPlace.name}</h2>
+                        {/* Aquí puedes mostrar detalles adicionales del lugar seleccionado si es necesario */}
+                    </Box>
+                )}
+                <Current current={current} />
                 <Hourly hourly={hourly} />
                 <Divider sx={{ marginTop: '10px', borderTop: '2px solid white', margin: '10px auto', width: '70%' }} />
-            
+
                 <DailyCard daily={daily} />
             </Box>
         </main>
