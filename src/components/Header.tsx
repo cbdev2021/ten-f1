@@ -7,7 +7,13 @@ import SearchBox from './header/SearchBox';
 import Carousel from './header/Carousel';
 import { Divider } from '@mui/material';
 
-const Header = () => {
+interface HeaderProps {
+    onPlaceSelected: (place: any) => void; // Especifica el tipo de la función onPlaceSelected
+}
+
+// const Header = ({ onPlaceSelected }) => {
+const Header: React.FC<HeaderProps> = ({ onPlaceSelected }) => {
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -26,7 +32,8 @@ const Header = () => {
                             <Divider orientation="vertical" style={{ backgroundColor: 'white', width: '0.2px' }} />
                         </div>
                         <div className="caja caja3">
-                            <SearchBox />
+                            {/* <SearchBox /> */}
+                            <SearchBox onPlaceSelected={onPlaceSelected} /> {/* Paso la función prop onPlaceSelected */}
                         </div>
                         <div className="caja caja4">
                             <Carousel />
