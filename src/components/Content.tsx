@@ -4,20 +4,50 @@ import Hourly from "./content/Hourly";
 import Current from "./content/Current";
 import DailyCard from "./content/DailyCard"; // Importando DailyCard
 import { auto } from '@popperjs/core';
+import { useGetWeatherPointQuery } from '../../src/slices/weatherApiSlice';
+
 
 // const Content = () => {
 const Content = ({ selectedPlace }) => {
-    const current = {
-        "icon": "fog",
-        "icon_num": 9,
-        "summary": "Fog",
-        "temperature": 9.2,
-        "wind": {
-            "speed": 0.6,
-            "angle": 87,
-            "dir": "E"
-        }
-    };
+    // const { data, isLoading } = useGetWeatherPointQuery(selectedPlace?.lon, selectedPlace?.lat); 
+
+    // const selectedLat = parseFloat(selectedPlace?.lat);
+    // const selectedLon = parseFloat(selectedPlace?.lon); 
+    // const { data, isLoading } = useGetWeatherPointQuery({
+    //     lat: selectedLat,
+    //     lon: selectedLon,
+    // });
+
+    const { data, isLoading } = useGetWeatherPointQuery({
+        lat: selectedPlace?.lat,
+        lon: selectedPlace?.lon,
+    });
+
+    console.log("selectedPlace");
+    console.log(selectedPlace);
+
+    console.log("data");
+    console.log(data);
+
+    if (isLoading) {
+        return <p>Loading...</p>; // Optional loading state
+    }
+
+    if (!data || !data.current) {
+        return null; // Handle case where data is not yet available
+    }
+
+    // const current = {
+    //     "icon": "fog",
+    //     "icon_num": 9,
+    //     "summary": "Fog",
+    //     "temperature": 9.2,
+    //     "wind": {
+    //         "speed": 0.6,
+    //         "angle": 87,
+    //         "dir": "E"
+    //     }
+    // };
 
     const hourly = {
         "data": [
@@ -687,10 +717,17 @@ const Content = ({ selectedPlace }) => {
                     <Box>
                         <h2>Weather for {selectedPlace.name}</h2>
                         {/* Aquí puedes mostrar detalles adicionales del lugar seleccionado si es necesario */}
+
+                        <h2>ejem: {data.current.temperature} </h2>
                     </Box>
                 )}
-                <Current current={current} />
-                <Hourly hourly={hourly} />
+
+                {/* <Current current={current} /> */}
+                {data && <Current current={data.current} />}
+
+                {/* <Hourly hourly={hourly} /> */}
+                {data && <Hourly hourly={data.hourly}  />}
+
                 <Divider sx={{ marginTop: '10px', borderTop: '2px solid white', margin: '10px auto', width: '70%' }} />
 
                 <DailyCard daily={daily} />
