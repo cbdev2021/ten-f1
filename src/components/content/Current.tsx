@@ -10,6 +10,9 @@ const Current = ({ current }) => {
     // const currentDate = moment().format("DD-MM");
     const currentDate = moment().format("dddd DD [de] MMMM");
 
+    console.log("current");
+    console.log(current);
+
     return (
         <Box
             className="content"

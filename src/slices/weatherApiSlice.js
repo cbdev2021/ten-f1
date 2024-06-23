@@ -8,7 +8,10 @@ export const weatherApiSlice = apiSlice.injectEndpoints({
     findPlaces: builder.query({
       query: (text) => `${LOCAL_BACKEND_URL}/places?text=${text}`, // Usamos la URL local y omitimos la clave API ya que se maneja internamente en el backend
     }),
+    getWeatherPoint: builder.query({
+      query: ({ lat, lon }) => `${LOCAL_BACKEND_URL}/point?lat=${lat}&lon=${lon}`,
+    }),
   }),
 });
 
-export const { useFindPlacesQuery } = weatherApiSlice;
+export const { useFindPlacesQuery, useGetWeatherPointQuery } = weatherApiSlice;
