@@ -1,3 +1,5 @@
+// SearchBox.jsx
+
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -6,18 +8,15 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { useFindPlacesQuery } from '../../slices/weatherApiSlice';
+import usePlaceSearch from '../../hooks/usePlaceSearch';
 
 interface SearchBoxProps {
     onPlaceSelected: (place: any) => void; // Especifica el tipo de la función onPlaceSelected
 }
 
-// const SearchBox = ({ onPlaceSelected }) => {
 const SearchBox: React.FC<SearchBoxProps> = ({ onPlaceSelected }) => {
-
     const [inputValue, setInputValue] = useState('');
-    const { data, isLoading } = useFindPlacesQuery(inputValue);
-    const places = data || [];
+    const { places, isLoading } = usePlaceSearch(inputValue); // Usa el hook usePlaceSearch
 
     const handlePlaceSelected = (event, value) => {
         onPlaceSelected(value); // Llama a la función proporcionada por App
@@ -68,6 +67,78 @@ const SearchBox: React.FC<SearchBoxProps> = ({ onPlaceSelected }) => {
 };
 
 export default SearchBox;
+
+
+// import React, { useState } from 'react';
+// import TextField from '@mui/material/TextField';
+// import Autocomplete from '@mui/material/Autocomplete';
+// import CircularProgress from '@mui/material/CircularProgress';
+// import ListItem from '@mui/material/ListItem';
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import ListItemText from '@mui/material/ListItemText';
+// import LocationOnIcon from '@mui/icons-material/LocationOn';
+// import { useFindPlacesQuery } from '../../slices/weatherApiSlice';
+
+// interface SearchBoxProps {
+//     onPlaceSelected: (place: any) => void; // Especifica el tipo de la función onPlaceSelected
+// }
+
+// // const SearchBox = ({ onPlaceSelected }) => {
+// const SearchBox: React.FC<SearchBoxProps> = ({ onPlaceSelected }) => {
+
+//     const [inputValue, setInputValue] = useState('');
+//     const { data, isLoading } = useFindPlacesQuery(inputValue);
+//     const places = data || [];
+
+//     const handlePlaceSelected = (event, value) => {
+//         onPlaceSelected(value); // Llama a la función proporcionada por App
+//     };
+
+//     return (
+//         <Autocomplete
+//             style={{ width: '245px', background: 'white', borderRadius: '4px' }}
+//             options={places}
+//             autoHighlight
+//             getOptionLabel={(option) => `${option.name}, ${option.adm_area1}, ${option.country}`}
+//             onChange={handlePlaceSelected} // Llama a handlePlaceSelected al seleccionar un lugar
+//             inputValue={inputValue}
+//             onInputChange={(event, newInputValue ) => setInputValue(newInputValue)}
+//             loading={isLoading}
+//             renderInput={(params) => (
+//                 <React.Fragment>
+//                     <TextField
+//                         {...params}
+//                         variant="outlined"
+//                         label="Temperatura en .."
+//                         InputLabelProps={{
+//                             shrink: false,
+//                             style: { display: inputValue ? 'none' : 'block' }
+//                         }}
+//                         style={{ fontSize: '12px', position: 'relative' }}
+//                     />
+//                     {isLoading && <CircularProgress size={20} style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)' }} />}
+//                 </React.Fragment>
+//             )}
+//             renderOption={(props, _option, { index }) => {
+//                 const place = places[index];
+//                 return (
+//                     <ListItem {...props} style={{ display: 'flex', alignItems: 'center' }}>
+//                         <ListItemIcon style={{ marginRight: '3px' }}>
+//                             <LocationOnIcon />
+//                         </ListItemIcon>
+//                         <ListItemText
+//                             primary={place.name}
+//                             secondary={`${place.adm_area1}, ${place.country}`}
+//                             style={{ fontSize: '5px' }}
+//                         />
+//                     </ListItem>
+//                 );
+//             }}
+//         />
+//     );
+// };
+
+// export default SearchBox;
 
 
 // import React, { useState, useEffect } from 'react';
