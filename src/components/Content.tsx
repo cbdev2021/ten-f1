@@ -3,13 +3,16 @@ import { Box, Divider } from "@mui/material";
 import Hourly from "./content/Hourly";
 import Current from "./content/Current";
 import DailyCard from "./content/DailyCard";
-import { useGetWeatherPointQuery } from '../../src/slices/weatherApiSlice';
+import useWeatherPointSearch from '../hooks/useWeatherPoingQuery';
 import usePlaceSearch from '../hooks/usePlaceSearch'; // Importa usePlaceSearch
 import { useLocation } from 'react-router-dom'; // Importa useLocation para obtener la ruta actual
+import { useSelector } from 'react-redux';
 
 const Content = ({ selectedPlace }) => {
     const location = useLocation(); // Obtiene la ubicación actual de la ruta
     const [cityFromUrl, setCityFromUrl] = useState('');
+    const selectedCity = useSelector((state: any) => state.cities.selectedCity); // Obtiene selectedCity del estado global de Redux
+
 
     useEffect(() => {
         // Extrae la ciudad de la URL (ejemplo: /temperature-in-santiago)
@@ -22,25 +25,38 @@ const Content = ({ selectedPlace }) => {
     }, [location.pathname]);
 
     // Obtiene datos de clima basados en selectedPlace cuando está disponible
-    const { data: weatherData, isLoading: weatherLoading } = useGetWeatherPointQuery({
-        lat: selectedPlace?.lat,
-        lon: selectedPlace?.lon,
+    // const { data: weatherData, isLoading: weatherLoading } = useWeatherPointSearch({
+    //     lat: selectedPlace?.lat,
+    //     lon: selectedPlace?.lon,
+    // });
+
+    const { weatherData: weatherDataCombo, isLoading: weatherLoading } = useWeatherPointSearch({
+        lat: selectedCity?.lat,
+        lon: selectedCity?.lon,
     });
+
 
     // Si selectedPlace no está disponible, usa cityFromUrl para buscar datos de clima
     const { places, isLoading: placeLoading } = usePlaceSearch(cityFromUrl);
-    const { data: weatherDataFromUrl, isLoading: weatherLoadingFromUrl } = useGetWeatherPointQuery({
+    const { weatherData: weatherDataFromUrl, isLoading: weatherLoadingFromUrl } = useWeatherPointSearch({
         lat: places[0]?.lat,
         lon: places[0]?.lon,
     });
+
+    // useEffect(() => {
+    //     resetWeatherPoint(); // Llamada a resetPlaces para establecer places en null
+    // }, [selectedPlace]);
 
     if (placeLoading || weatherLoading || weatherLoadingFromUrl) {
         return <p>Loading...</p>; // Muestra un estado de carga mientras se obtienen los datos
     }
 
     // Elige los datos de clima basados en la disponibilidad de selectedPlace y cityFromUrl
-    const currentWeather = selectedPlace ? weatherData?.current : weatherDataFromUrl?.current;
-    const hourlyWeather = selectedPlace ? weatherData?.hourly : weatherDataFromUrl?.hourly;
+    // const currentWeather = selectedPlace ? weatherDataCombo?.current : weatherDataFromUrl?.current;
+    // const hourlyWeather = selectedPlace ? weatherDataCombo?.hourly : weatherDataFromUrl?.hourly;
+
+    const currentWeather = weatherDataCombo?.current || weatherDataFromUrl?.current;
+    const hourlyWeather = weatherDataCombo?.hourly || weatherDataFromUrl?.hourly;
 
     if (!currentWeather) {
         return <p>No weather data available.</p>; // Maneja el caso donde no hay datos de clima disponibles
