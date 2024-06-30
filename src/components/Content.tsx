@@ -6,24 +6,42 @@ import DailyCard from "./content/DailyCard";
 import useWeatherPointSearch from '../hooks/useWeatherPoingQuery';
 import usePlaceSearch from '../hooks/usePlaceSearch'; // Importa usePlaceSearch
 import { useLocation } from 'react-router-dom'; // Importa useLocation para obtener la ruta actual
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux'; 
+import { useNavigate  } from 'react-router-dom';
 
 const Content = ({ selectedPlace }) => {
     const location = useLocation(); // Obtiene la ubicación actual de la ruta
     const [cityFromUrl, setCityFromUrl] = useState('');
     const selectedCity = useSelector((state: any) => state.cities.selectedCity); // Obtiene selectedCity del estado global de Redux
+    const navigate = useNavigate();
 
+    // useEffect(() => {
+    //     const path = location.pathname;  
+    //     const parts = path.split('/');  
+    //     const lastPart = parts[parts.length - 1]; 
+    //     const city = lastPart.replace('temperature-in-', '');  
+    //     setCityFromUrl(city);  
+    // }, [location.pathname]);
 
     useEffect(() => {
-        // Extrae la ciudad de la URL (ejemplo: /temperature-in-santiago)
-        const path = location.pathname; // Obtiene la ruta actual
-        const parts = path.split('/'); // Divide la ruta en partes separadas por '/'
-        const lastPart = parts[parts.length - 1]; // Obtiene la última parte de la ruta
-        const city = lastPart.replace('temperature-in-', ''); // Elimina el prefijo "temperature-in-" para obtener el nombre de la ciudad
-
-        setCityFromUrl(city); // Establece la ciudad obtenida del URL en el estado local
-    }, [location.pathname]);
-
+        // Obtener el nombre de la ciudad desde la URL actual
+        const path = location.pathname;  
+        const parts = path.split('/');  
+        const lastPart = parts[parts.length - 1]; 
+        const cityFromPath = lastPart.replace('temperature-in-', '');  
+    
+        // Si selectedCity tiene datos, actualizar cityFromUrl y redirigir
+        if (selectedCity) {
+            setCityFromUrl(selectedCity.name);
+            // navigate(`/temperature-in-${selectedCity.name}`);
+            //min y quitar %20 x -
+            navigate(`/temperature-in-${selectedCity.name.toLowerCase().replace(/\s+/g, '-')}`);
+        } else {
+            // Si no hay selectedCity, actualizar cityFromUrl desde la URL
+            setCityFromUrl(cityFromPath);
+        }
+    }, [selectedCity, location.pathname, navigate,setCityFromUrl]);
+    
     // Obtiene datos de clima basados en selectedPlace cuando está disponible
     // const { data: weatherData, isLoading: weatherLoading } = useWeatherPointSearch({
     //     lat: selectedPlace?.lat,
@@ -35,9 +53,9 @@ const Content = ({ selectedPlace }) => {
         lon: selectedCity?.lon,
     });
 
-
     // Si selectedPlace no está disponible, usa cityFromUrl para buscar datos de clima
     const { places, isLoading: placeLoading } = usePlaceSearch(cityFromUrl);
+
     const { weatherData: weatherDataFromUrl, isLoading: weatherLoadingFromUrl } = useWeatherPointSearch({
         lat: places[0]?.lat,
         lon: places[0]?.lon,
